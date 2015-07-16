@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="HomeViewController" customModule="LOLFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input a summoner name to look up!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTZ-GS-zdJ">
+                                <rect key="frame" x="0.0" y="189" width="600" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeH-DM-RtM">
+                                <rect key="frame" x="218" y="235" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="PxO-Sj-QGS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Xvz-fU-ucz"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfF-ef-MgD">
+                                <rect key="frame" x="276" y="273" width="48" height="30"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchSummoner" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cXc-G7-6ga"/>
+                                    <segue destination="M5H-oW-SlY" kind="show" identifier="showSummonerInfo" id="aur-PB-6Od"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="169" id="2pS-q5-r8B"/>
+                            <constraint firstItem="MfF-ef-MgD" firstAttribute="centerX" secondItem="ZeH-DM-RtM" secondAttribute="centerX" id="8sa-sl-gxd"/>
+                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EWP-u0-t7E"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gTZ-GS-zdJ" secondAttribute="bottom" constant="351" id="FJL-y2-DwL"/>
+                            <constraint firstAttribute="trailing" secondItem="gTZ-GS-zdJ" secondAttribute="trailing" id="Oyn-4S-IWF"/>
+                            <constraint firstItem="MfF-ef-MgD" firstAttribute="top" secondItem="ZeH-DM-RtM" secondAttribute="bottom" constant="8" symbolic="YES" id="Rvd-6G-7wh"/>
+                            <constraint firstItem="ZeH-DM-RtM" firstAttribute="centerX" secondItem="gTZ-GS-zdJ" secondAttribute="centerX" id="vNR-nO-ZQg"/>
+                            <constraint firstItem="ZeH-DM-RtM" firstAttribute="top" secondItem="gTZ-GS-zdJ" secondAttribute="bottom" constant="-14" id="w0b-Em-9Qe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="summonerName" destination="ZeH-DM-RtM" id="Gxc-pG-UA9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Summoner Info View Controller-->
+        <scene sceneID="c32-Nh-Xhq">
+            <objects>
+                <viewController id="M5H-oW-SlY" customClass="SummonerInfoViewController" customModule="LOLFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ocx-S7-MOh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cxa-o1-jHs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hvK-H9-PWP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4f-x4-lX0">
+                                <rect key="frame" x="16" y="289" width="568" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="568" id="6i6-Rb-S4r"/>
+                                    <constraint firstAttribute="height" constant="21" id="YKO-9u-Osa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cxa-o1-jHs" firstAttribute="top" secondItem="V4f-x4-lX0" secondAttribute="bottom" constant="290" id="2xX-vT-Mgw"/>
+                            <constraint firstItem="V4f-x4-lX0" firstAttribute="top" secondItem="ocx-S7-MOh" secondAttribute="bottom" constant="269" id="LOG-Qn-O7Q"/>
+                            <constraint firstItem="V4f-x4-lX0" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" id="cg7-a4-Kaf"/>
+                            <constraint firstItem="V4f-x4-lX0" firstAttribute="trailing" secondItem="hvK-H9-PWP" secondAttribute="trailingMargin" id="nKe-p9-U8S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="summonerName" destination="V4f-x4-lX0" id="NRv-9K-uvQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yaq-hz-uXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1270" y="477"/>
+        </scene>
+    </scenes>
+</document>
