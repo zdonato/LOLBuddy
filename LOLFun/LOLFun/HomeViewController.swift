@@ -8,14 +8,42 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var summonerName: UITextField?;
+    @IBOutlet weak var regionPicker: UIPickerView?;
+    
+    private let regions = [ "BR",
+                            "EUNE",
+                            "EUW",
+                            "KR",
+                            "LAN",
+                            "LAS",
+                            "NA",
+                            "OCE",
+                            "RU",
+                            "TR"
+                            ]
+    
+    private var selectedRegion : String?;
+    private var summonerInfo : JSON?;
+    private var idString: String?;
+    private var levelString: String?;
+    private var summonerString : String?;
+    
+    let helper = APIManager();
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.regionPicker?.delegate = self;
+        self.regionPicker?.dataSource = self;
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.summonerName!.text = "";
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,23 +51,62 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func searchSummoner()
-    {
-        self.performSegueWithIdentifier("showSummonerInfo", sender: self);
+    // MARK: - UIPickerDelegate & DataSource
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return regions.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return regions[row];
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedRegion = regions[row];
     }
     
 
     // MARK: - Navigation
+    
+    @IBAction func searchSummoner()
+    {
+        helper.getBasicSummonerInfo(summonerName!.text, region: selectedRegion!)
+        {
+            (json) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+            () -> Void in
+                self.summonerInfo = json;
+                
+                // Convert summoner name to lower case and without white space for object name. 
+                var cleanName = "".join(map(self.summonerName!.text.generate()) {
+                    $0 == " " ? "" : String($0)
+                })
+                
+                cleanName = cleanName.lowercaseString;
+                
+                self.idString       = json[cleanName]["id"].stringValue;
+                self.levelString    = String(json[cleanName]["summonerLevel"].intValue);
+                self.summonerString = json[cleanName]["name"].stringValue;
+                
+                self.performSegueWithIdentifier("showSummonerInfo", sender: self);
+            }
+        };
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
         println(summonerName!.text);
         
         let destination: SummonerInfoViewController = segue.destinationViewController as! SummonerInfoViewController;
         
-        destination.summString = summonerName!.text;
+        destination.summString   = self.summonerString;
+        destination.regionString = self.selectedRegion;
+        destination.summonerInfo = self.summonerInfo;
+        destination.idString     = self.idString;
+        destination.levelString  = self.levelString;
     }
 }

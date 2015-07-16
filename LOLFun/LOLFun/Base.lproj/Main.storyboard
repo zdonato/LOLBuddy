@@ -18,7 +18,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input a summoner name to look up!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTZ-GS-zdJ">
-                                <rect key="frame" x="0.0" y="189" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="167" width="600" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="fWY-jb-XGi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,25 +43,44 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="searchSummoner" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cXc-G7-6ga"/>
-                                    <segue destination="M5H-oW-SlY" kind="show" identifier="showSummonerInfo" id="aur-PB-6Od"/>
+                                    <action selector="searchSummoner" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MW0-0E-evg"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBf-5g-b6M">
+                                <rect key="frame" x="0.0" y="311" width="600" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="lY1-J7-CnI"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="9I7-Wd-sUp"/>
+                                </connections>
+                            </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqm-4O-Bmc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Summoner Info" id="wSR-MZ-7jG"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="169" id="2pS-q5-r8B"/>
+                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="centerX" secondItem="ZeH-DM-RtM" secondAttribute="centerX" id="4uO-pY-2Fs"/>
+                            <constraint firstItem="WBf-5g-b6M" firstAttribute="leading" secondItem="gTZ-GS-zdJ" secondAttribute="leading" id="5fg-Rl-2sT"/>
                             <constraint firstItem="MfF-ef-MgD" firstAttribute="centerX" secondItem="ZeH-DM-RtM" secondAttribute="centerX" id="8sa-sl-gxd"/>
-                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EWP-u0-t7E"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gTZ-GS-zdJ" secondAttribute="bottom" constant="351" id="FJL-y2-DwL"/>
-                            <constraint firstAttribute="trailing" secondItem="gTZ-GS-zdJ" secondAttribute="trailing" id="Oyn-4S-IWF"/>
+                            <constraint firstItem="tqm-4O-Bmc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="GJt-Jt-LTt"/>
+                            <constraint firstItem="WBf-5g-b6M" firstAttribute="trailing" secondItem="gTZ-GS-zdJ" secondAttribute="trailing" id="Jd2-tB-IH5"/>
+                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Nk6-2D-tdm"/>
+                            <constraint firstItem="gTZ-GS-zdJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="147" id="PEN-i6-GeG"/>
                             <constraint firstItem="MfF-ef-MgD" firstAttribute="top" secondItem="ZeH-DM-RtM" secondAttribute="bottom" constant="8" symbolic="YES" id="Rvd-6G-7wh"/>
-                            <constraint firstItem="ZeH-DM-RtM" firstAttribute="centerX" secondItem="gTZ-GS-zdJ" secondAttribute="centerX" id="vNR-nO-ZQg"/>
-                            <constraint firstItem="ZeH-DM-RtM" firstAttribute="top" secondItem="gTZ-GS-zdJ" secondAttribute="bottom" constant="-14" id="w0b-Em-9Qe"/>
+                            <constraint firstItem="WBf-5g-b6M" firstAttribute="top" secondItem="MfF-ef-MgD" secondAttribute="bottom" constant="8" symbolic="YES" id="bO6-DV-0se"/>
+                            <constraint firstAttribute="trailing" secondItem="gTZ-GS-zdJ" secondAttribute="trailing" id="eOl-8N-EHh"/>
+                            <constraint firstItem="MfF-ef-MgD" firstAttribute="top" secondItem="gTZ-GS-zdJ" secondAttribute="bottom" constant="46" id="hqP-7v-l6X"/>
+                            <constraint firstItem="tqm-4O-Bmc" firstAttribute="leading" secondItem="gTZ-GS-zdJ" secondAttribute="leading" id="mqQ-OP-l6f"/>
+                            <constraint firstItem="tqm-4O-Bmc" firstAttribute="trailing" secondItem="gTZ-GS-zdJ" secondAttribute="trailing" id="yxX-4Q-VXq"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="regionPicker" destination="WBf-5g-b6M" id="6kb-b5-Mlo"/>
                         <outlet property="summonerName" destination="ZeH-DM-RtM" id="Gxc-pG-UA9"/>
+                        <segue destination="M5H-oW-SlY" kind="show" identifier="showSummonerInfo" id="kGN-f2-zDg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -76,11 +98,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4f-x4-lX0">
-                                <rect key="frame" x="16" y="289" width="568" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cx0-67-6hL" userLabel="Region">
+                                <rect key="frame" x="15" y="370" width="568" height="76"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="568" id="6i6-Rb-S4r"/>
-                                    <constraint firstAttribute="height" constant="21" id="YKO-9u-Osa"/>
+                                    <constraint firstAttribute="width" constant="568" id="dqp-ZR-rzG"/>
+                                    <constraint firstAttribute="height" constant="76" id="nPX-vJ-Gd6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJm-aY-DOj" userLabel="Summ Name">
+                                <rect key="frame" x="16" y="208" width="568" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="568" id="9BK-SV-LH0"/>
+                                    <constraint firstAttribute="height" constant="48" id="SuT-rp-NTf"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="bv6-S4-zDj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJ2-uo-2Xt" userLabel="ID">
+                                <rect key="frame" x="16" y="278" width="569" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="569" id="VpU-Oh-PDF"/>
+                                    <constraint firstAttribute="height" constant="21" id="W64-9l-z4U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0D-S0-bdB">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Summoner Info" id="7hv-4n-vsu">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Fz3-Pp-gJh">
+                                            <connections>
+                                                <action selector="back" destination="M5H-oW-SlY" id="idi-bz-wcb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08g-oR-o5A" userLabel="Level">
+                                <rect key="frame" x="16" y="323" width="568" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="568" id="0Xh-lP-8Jc"/>
+                                    <constraint firstAttribute="height" constant="21" id="R2j-sl-nMX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -89,19 +154,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Cxa-o1-jHs" firstAttribute="top" secondItem="V4f-x4-lX0" secondAttribute="bottom" constant="290" id="2xX-vT-Mgw"/>
-                            <constraint firstItem="V4f-x4-lX0" firstAttribute="top" secondItem="ocx-S7-MOh" secondAttribute="bottom" constant="269" id="LOG-Qn-O7Q"/>
-                            <constraint firstItem="V4f-x4-lX0" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" id="cg7-a4-Kaf"/>
-                            <constraint firstItem="V4f-x4-lX0" firstAttribute="trailing" secondItem="hvK-H9-PWP" secondAttribute="trailingMargin" id="nKe-p9-U8S"/>
+                            <constraint firstItem="j0D-S0-bdB" firstAttribute="centerX" secondItem="kJm-aY-DOj" secondAttribute="centerX" id="1Ur-Ve-F8G"/>
+                            <constraint firstItem="cx0-67-6hL" firstAttribute="top" secondItem="08g-oR-o5A" secondAttribute="bottom" constant="26" id="4PQ-Sc-zoz"/>
+                            <constraint firstItem="Cxa-o1-jHs" firstAttribute="top" secondItem="cx0-67-6hL" secondAttribute="bottom" constant="154" id="7tb-Df-ERF"/>
+                            <constraint firstItem="cx0-67-6hL" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" constant="-1" id="BSO-lv-ibe"/>
+                            <constraint firstItem="MJ2-uo-2Xt" firstAttribute="leading" secondItem="kJm-aY-DOj" secondAttribute="leading" id="Fc5-KD-jGE"/>
+                            <constraint firstItem="08g-oR-o5A" firstAttribute="leading" secondItem="MJ2-uo-2Xt" secondAttribute="leading" id="Gba-2F-PPJ"/>
+                            <constraint firstItem="cx0-67-6hL" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" constant="-1" id="U71-vZ-IOx"/>
+                            <constraint firstItem="kJm-aY-DOj" firstAttribute="trailing" secondItem="hvK-H9-PWP" secondAttribute="trailingMargin" id="Xy6-SS-MKF"/>
+                            <constraint firstItem="kJm-aY-DOj" firstAttribute="top" secondItem="ocx-S7-MOh" secondAttribute="bottom" constant="188" id="YYH-7h-BRb"/>
+                            <constraint firstItem="j0D-S0-bdB" firstAttribute="top" secondItem="hvK-H9-PWP" secondAttribute="top" id="bLY-aF-zVh"/>
+                            <constraint firstItem="08g-oR-o5A" firstAttribute="trailing" secondItem="kJm-aY-DOj" secondAttribute="trailing" id="dU9-j4-Ryz"/>
+                            <constraint firstItem="08g-oR-o5A" firstAttribute="top" secondItem="MJ2-uo-2Xt" secondAttribute="bottom" constant="24" id="eXO-bE-DGR"/>
+                            <constraint firstItem="MJ2-uo-2Xt" firstAttribute="top" secondItem="kJm-aY-DOj" secondAttribute="bottom" constant="22" id="i6n-xV-P3y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cx0-67-6hL" secondAttribute="trailing" constant="1" id="tMy-Kx-NHf"/>
+                            <constraint firstItem="kJm-aY-DOj" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" id="vCz-RK-gYA"/>
+                            <constraint firstItem="MJ2-uo-2Xt" firstAttribute="centerX" secondItem="kJm-aY-DOj" secondAttribute="centerX" id="xxe-dj-YGN"/>
+                            <constraint firstItem="j0D-S0-bdB" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leading" id="zd1-Tz-K4p"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="summonerName" destination="V4f-x4-lX0" id="NRv-9K-uvQ"/>
+                        <outlet property="id" destination="MJ2-uo-2Xt" id="Pge-3U-XXJ"/>
+                        <outlet property="level" destination="08g-oR-o5A" id="70W-Qw-VCm"/>
+                        <outlet property="region" destination="cx0-67-6hL" id="vfu-xV-owI"/>
+                        <outlet property="summonerName" destination="kJm-aY-DOj" id="41R-ig-ph5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yaq-hz-uXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1270" y="477"/>
+            <point key="canvasLocation" x="1260" y="345"/>
         </scene>
     </scenes>
 </document>
