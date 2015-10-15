@@ -20,6 +20,8 @@ class SummonerInfoViewController: UIViewController {
     var regionString : String?;
     var idString : String?;
     var levelString : String?;
+    
+    let helper = APIManager();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,16 @@ class SummonerInfoViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         });
+    }
+    
+    
+    @IBAction func getInGameInfo()
+    {
+        helper.getInGameInformationForSummoner(idString!, region: regionString!)
+            {
+                (json) -> Void in
+                println(json);
+        }
     }
     
 

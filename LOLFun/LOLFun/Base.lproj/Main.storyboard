@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -151,6 +151,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFM-P4-HZ5">
+                                <rect key="frame" x="242" y="536" width="117" height="30"/>
+                                <state key="normal" title="Get In Game Info">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getInGameInfo" destination="M5H-oW-SlY" eventType="touchUpInside" id="Ima-hz-06H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -163,7 +172,9 @@
                             <constraint firstItem="cx0-67-6hL" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" constant="-1" id="U71-vZ-IOx"/>
                             <constraint firstItem="kJm-aY-DOj" firstAttribute="trailing" secondItem="hvK-H9-PWP" secondAttribute="trailingMargin" id="Xy6-SS-MKF"/>
                             <constraint firstItem="kJm-aY-DOj" firstAttribute="top" secondItem="ocx-S7-MOh" secondAttribute="bottom" constant="188" id="YYH-7h-BRb"/>
+                            <constraint firstItem="Cxa-o1-jHs" firstAttribute="top" secondItem="EFM-P4-HZ5" secondAttribute="bottom" constant="34" id="ZRe-Ta-yKT"/>
                             <constraint firstItem="j0D-S0-bdB" firstAttribute="top" secondItem="hvK-H9-PWP" secondAttribute="top" id="bLY-aF-zVh"/>
+                            <constraint firstItem="EFM-P4-HZ5" firstAttribute="centerX" secondItem="08g-oR-o5A" secondAttribute="centerX" id="cYk-aX-q5C"/>
                             <constraint firstItem="08g-oR-o5A" firstAttribute="trailing" secondItem="kJm-aY-DOj" secondAttribute="trailing" id="dU9-j4-Ryz"/>
                             <constraint firstItem="08g-oR-o5A" firstAttribute="top" secondItem="MJ2-uo-2Xt" secondAttribute="bottom" constant="24" id="eXO-bE-DGR"/>
                             <constraint firstItem="MJ2-uo-2Xt" firstAttribute="top" secondItem="kJm-aY-DOj" secondAttribute="bottom" constant="22" id="i6n-xV-P3y"/>

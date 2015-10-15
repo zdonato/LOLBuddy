@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var summonerName: UITextField?;
     @IBOutlet weak var regionPicker: UIPickerView?;
@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         self.regionPicker?.delegate = self;
         self.regionPicker?.dataSource = self;
+        self.summonerName?.delegate = self;
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,6 +68,11 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRegion = regions[row];
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder();
+        return true;
     }
     
 
