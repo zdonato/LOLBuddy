@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CC3A6DAA-9044-4661-9B44-CFCEFF54DB52</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LOLFun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B55BA68D206E908A50A4A89E7667E18E1ED8C2AE</key>
+		<string>https://github.com/zdonato/LOLFun.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LOLFun/LOLFun.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B55BA68D206E908A50A4A89E7667E18E1ED8C2AE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zdonato/LOLFun.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B55BA68D206E908A50A4A89E7667E18E1ED8C2AE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B55BA68D206E908A50A4A89E7667E18E1ED8C2AE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LOLFun</string>
+		</dict>
+	</array>
+</dict>
+</plist>
