@@ -25,11 +25,9 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             "TR"
                             ]
     
-    private var selectedRegion : String?;
+    private var region : String?;
     private var summonerInfo : JSON?;
-    private var idString: String?;
-    private var levelString: String?;
-    private var summonerString : String?;
+    private var summonerId: String?;
     
     let helper = APIManager();
     
@@ -62,12 +60,12 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         return regions.count;
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return regions[row];
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRegion = regions[row];
+        region = regions[row];
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -80,7 +78,7 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     @IBAction func searchSummoner()
     {
-        helper.getBasicSummonerInfo(summonerName!.text, region: selectedRegion!)
+        helper.getBasicSummonerInfo(self.summonerName!.text!, region: region!)
         {
             (json) -> Void in
             dispatch_async(dispatch_get_main_queue()) {
@@ -88,15 +86,11 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 self.summonerInfo = json;
                 
                 // Convert summoner name to lower case and without white space for object name. 
-                var cleanName = "".join(map(self.summonerName!.text.generate()) {
-                    $0 == " " ? "" : String($0)
-                })
+                var cleanName = self.helper.cleanSummonerName(self.summonerName!.text!);
                 
                 cleanName = cleanName.lowercaseString;
                 
-                self.idString       = json[cleanName]["id"].stringValue;
-                self.levelString    = String(json[cleanName]["summonerLevel"].intValue);
-                self.summonerString = json[cleanName]["name"].stringValue;
+                self.summonerId = json[cleanName]["id"].stringValue;
                 
                 self.performSegueWithIdentifier("showSummonerInfo", sender: self);
             }
@@ -105,14 +99,13 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        println(summonerName!.text);
+        print(summonerName!.text);
         
         let destination: SummonerInfoViewController = segue.destinationViewController as! SummonerInfoViewController;
         
-        destination.summString   = self.summonerString;
-        destination.regionString = self.selectedRegion;
-        destination.summonerInfo = self.summonerInfo;
-        destination.idString     = self.idString;
-        destination.levelString  = self.levelString;
+        destination.setSummonerInfo(self.summonerInfo!);
+        destination.setSummonerId(self.summonerId!);
+        destination.setRegion(self.region!);
+        destination.setSummonerName(self.summonerName!.text!); 
     }
 }

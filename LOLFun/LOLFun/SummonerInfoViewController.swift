@@ -9,30 +9,37 @@
 import UIKit
 
 class SummonerInfoViewController: UIViewController {
-
-    @IBOutlet weak var summonerName: UILabel!;
-    @IBOutlet weak var region: UILabel!;
-    @IBOutlet weak var id: UILabel!;
-    @IBOutlet weak var level: UILabel!;
     
-    var summonerInfo : JSON?;
-    var summString : String?;
-    var regionString : String?;
-    var idString : String?;
-    var levelString : String?;
+    @IBOutlet weak var summonerNameLabel: UILabel!
+    @IBOutlet weak var divisionNameLabel: UILabel!
+    @IBOutlet weak var winLossLabel: UILabel!
+    @IBOutlet weak var tierLabel: UILabel!
+    @IBOutlet weak var divisionImage: UIImageView!
+    
+    // Cached info to store.
+    private var summonerInfo : JSON?;
+    private var summonerId : String?;
+    private var region : String?
+    private var summonerName : String?
+    private let kRankedSoloQueue : String = "RANKED_SOLO_5x5";
     
     let helper = APIManager();
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print(summonerInfo);
         
-        summonerName.text = "Summoner Name: \(summString!)";
-        region.text = "Region: \(regionString!)";
-        id.text = "ID: \(idString!)";
-        level.text = "Level: \(levelString!)";
-        
-        println(summonerInfo); 
+        // Get the ranked information for the summoner. 
+        dispatch_async(dispatch_get_main_queue()) {
+            self.helper.getRankedInformationForSummonerById(self.summonerId!, region: self.region!.lowercaseString)
+                {
+                    (json) -> Void in
+                    self.summonerInfo = json;
+                    print(json);
+                    self.setUpUI(json);
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,20 +47,12 @@ class SummonerInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func back()
-    {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        });
-    }
-    
-    
     @IBAction func getInGameInfo()
     {
-        helper.getInGameInformationForSummoner(idString!, region: regionString!)
+        self.helper.getInGameInformationForSummoner(summonerId!, region: region!)
             {
                 (json) -> Void in
-                println(json);
+                print(json);
         }
     }
     
@@ -67,5 +66,73 @@ class SummonerInfoViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK : Getters and Setters
+    func getSummonerInfo () -> JSON
+    {
+        return self.summonerInfo!;
+    }
+    
+    func setSummonerInfo(json: JSON)
+    {
+        self.summonerInfo = json;
+    }
+    
+    func getSummonerId () -> String
+    {
+        return self.summonerId!;
+    }
+    
+    func setSummonerId(id: String)
+    {
+        self.summonerId = id;
+    }
+    
+    func getRegion () -> String
+    {
+        return self.region!;
+    }
+    
+    func setRegion(id: String)
+    {
+        self.region = id;
+    }
+    
+    func getSummonerName () -> String
+    {
+        return self.summonerName!;
+    }
+    
+    func setSummonerName(name: String)
+    {
+        self.summonerName = name;
+    }
+
+    func setUpUI(json: JSON)
+    {
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.divisionImage.image    = UIImage(named: "challenger");
+            let soloQueueIndex          = self.findRankedSolo(json, id: self.summonerId!);
+            let soloQueueObject         = json[self.summonerId!][soloQueueIndex];
+            self.summonerNameLabel.text = self.summonerName!;
+            self.divisionNameLabel.text = soloQueueObject["name"].stringValue;
+            self.winLossLabel.text      = String(soloQueueObject["entries"][0]["wins"].intValue) + "W  " +  String(soloQueueObject["entries"][0]["losses"].intValue) + "L";
+            self.tierLabel.text         = soloQueueObject["tier"].stringValue.lowercaseString.capitalizedString + " " + soloQueueObject["entries"][0]["division"].stringValue + "  " + String(soloQueueObject["entries"][0]["leaguePoints"].intValue) + "LP";
+        }
+    }
+    
+    func findRankedSolo(json: JSON, id : String) -> Int
+    {
+        for (var i = 0; i < json[id].count; i++)
+        {
+            if (json[id][i]["queue"].stringValue == self.kRankedSoloQueue)
+            {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
 
 }
