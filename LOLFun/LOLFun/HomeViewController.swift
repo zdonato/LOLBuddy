@@ -50,6 +50,10 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true);
+    }
+    
     // MARK: - UIPickerDelegate & DataSource
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -108,4 +112,6 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         destination.setRegion(self.region!);
         destination.setSummonerName(self.summonerName!.text!); 
     }
+    
+    
 }

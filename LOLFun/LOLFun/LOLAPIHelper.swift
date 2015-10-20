@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class APIManager : NSObject {
 
@@ -86,6 +87,16 @@ class APIManager : NSObject {
         }
         
         return platformID;
+    }
+    
+    // Function to get the division image for a summoner.
+    //
+    // @param divisionName : The name of the division as returned from the server.
+    //
+    // @return Returns the image for the divison
+    func getImageForDivisionByName(divisionName : String) -> UIImage
+    {
+        return UIImage(named: divisionName)!;
     }
     
     // MARK: Static API Helper Functions
@@ -183,7 +194,7 @@ class APIManager : NSObject {
     // @param completion : The completion block to run once the data is returned
     //
     // @return Returns in game information in JSON format
-    func getInGameInformationForSummoner(summonerID : String, region: String, completion: (json : JSON) -> Void)
+    func getInGameInformationForSummonerById(summonerID : String, region: String, completion: (json : JSON) -> Void)
     {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration();
         let session = NSURLSession(configuration: config);

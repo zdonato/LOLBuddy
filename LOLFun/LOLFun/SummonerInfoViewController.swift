@@ -49,7 +49,7 @@ class SummonerInfoViewController: UIViewController {
     
     @IBAction func getInGameInfo()
     {
-        self.helper.getInGameInformationForSummoner(summonerId!, region: region!)
+        self.helper.getInGameInformationForSummonerById(summonerId!, region: region!)
             {
                 (json) -> Void in
                 print(json);
@@ -112,10 +112,15 @@ class SummonerInfoViewController: UIViewController {
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.divisionImage.image    = UIImage(named: "challenger");
             let soloQueueIndex          = self.findRankedSolo(json, id: self.summonerId!);
             let soloQueueObject         = json[self.summonerId!][soloQueueIndex];
-            self.summonerNameLabel.text = self.summonerName!;
+            var divisionName            = soloQueueObject["tier"].stringValue.lowercaseString;
+            if (divisionName != "challenger" && divisionName != "master")
+            {
+                divisionName += "_" + soloQueueObject["entries"][0]["division"].stringValue.lowercaseString;
+            }
+            self.divisionImage.image    = self.helper.getImageForDivisionByName(divisionName);
+            self.summonerNameLabel.text = soloQueueObject["entries"][0]["playerOrTeamName"].stringValue;
             self.divisionNameLabel.text = soloQueueObject["name"].stringValue;
             self.winLossLabel.text      = String(soloQueueObject["entries"][0]["wins"].intValue) + "W  " +  String(soloQueueObject["entries"][0]["losses"].intValue) + "L";
             self.tierLabel.text         = soloQueueObject["tier"].stringValue.lowercaseString.capitalizedString + " " + soloQueueObject["entries"][0]["division"].stringValue + "  " + String(soloQueueObject["entries"][0]["leaguePoints"].intValue) + "LP";
