@@ -32,6 +32,7 @@ class APIManager : NSObject {
     private let kMasteryURL         : String = "v1.2/mastery";
     private let kRuneURL            : String = "v1.2/rune";
     private let kSummonerSpell      : String = "v1.2/summoner-spell";
+    private let kChampionImageURL   : String = "ddragon.leagueoflegends.com/cdn/5.20.1/img/champion/";
     
     // MARK: Game Info URL's
     private let kInGameInfoURL      : String = "observer-mode/rest/consumer/getSpectatorGameInfo/"
@@ -103,18 +104,61 @@ class APIManager : NSObject {
     
     // Function to get the info of a champion given the champion ID. 
     //
-    //@param championID : The id of the champion
+    //@param championID : The id's of the champions to return
     //@param completion : Completion block to run once the data is returned
     //
     //@return Returns the champion info in JSON format in the completion block
-    func getChampionById(championID : String, completion: (json : JSON) -> Void)
+    func getChampionsById(championID : Array<String>) -> Array<Champion>
     {
+        var championObjectArray : Array<Champion> = Array<Champion>();
+        var champObject : Champion?;
+        for id in championID
+        {
+            for (someString, obj) in champData
+            {
+                if (id == obj["id"].stringValue){
+                    champObject = Champion(name: obj["name"].stringValue, id: obj["id"].stringValue, title: obj["title"].stringValue, imageName: obj["image"]["full"].stringValue);
+                    championObjectArray.append(champObject!);
+                }
+            }
+        }
         
+        return championObjectArray;
+    }
+    
+    // Function to get the champion square image by name.
+    //
+    // @param championName : The name of the champion's image.
+    // @param completion : Completion block to run once the data is returned.
+    //
+    // @return Returns the image for the champion.
+    func getChampionImageByName(championName : String, completion : (image: UIImage) -> Void)
+    {
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration();
+        let session = NSURLSession(configuration: config);
+        let request = NSMutableURLRequest();
+        
+        request.URL = NSURL(string: "http://\(kChampionImageURL)\(championName)");
+        request.HTTPMethod = "GET";
+        
+        let task = session.dataTaskWithRequest(request){
+            (data, response, error) -> Void in
+                if (error != nil)
+                {
+                    print(error);
+                }
+                else
+                {
+                    completion(image: UIImage(data: data!)!);
+                }
+        }
+        
+        task.resume();
     }
     
     // MARK: Get Basic Summoner Info
 
-    // Function to get basic summoner info. 
+    // Function to get basic summoner info.
     //
     // @param summonerName : The name of the summoner
     // @param region : The region of the summoner

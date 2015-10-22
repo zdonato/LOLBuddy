@@ -15,7 +15,7 @@ class SummonerInfoViewController: UIViewController {
     @IBOutlet weak var winLossLabel: UILabel!
     @IBOutlet weak var tierLabel: UILabel!
     @IBOutlet weak var divisionImage: UIImageView!
-    
+
     // Cached info to store.
     private var summonerInfo : JSON?;
     private var summonerId : String?;
@@ -49,13 +49,22 @@ class SummonerInfoViewController: UIViewController {
     
     @IBAction func getInGameInfo()
     {
-        self.helper.getInGameInformationForSummonerById(summonerId!, region: region!)
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.helper.getInGameInformationForSummonerById(self.summonerId!, region: self.region!)
             {
                 (json) -> Void in
-                print(json);
+                var champions : Array<Champion> = self.helper.getChampionsById(["60", "412"]);
+                dispatch_async(dispatch_get_main_queue()){
+                    self.helper.getChampionImageByName("Thresh.png")
+                    {
+                        (image) -> Void in
+                            self.divisionImage.image = image;
+                    }
+                }
+            }
         }
     }
-    
 
     /*
     // MARK: - Navigation

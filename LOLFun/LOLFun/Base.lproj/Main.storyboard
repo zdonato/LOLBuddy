@@ -176,6 +176,13 @@
                                 <color key="textColor" red="0.0" green="0.13683772120000001" blue="0.98763066529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NfS-2G-g6E">
+                                <rect key="frame" x="257" y="431" width="87" height="30"/>
+                                <state key="normal" title="In Game Info"/>
+                                <connections>
+                                    <action selector="getInGameInfo" destination="M5H-oW-SlY" eventType="touchUpInside" id="19p-5Y-S1X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -188,9 +195,11 @@
                             <constraint firstItem="TPh-kd-No2" firstAttribute="top" secondItem="hWo-HK-x0b" secondAttribute="bottom" constant="15" id="HWq-rT-O2z"/>
                             <constraint firstItem="hWo-HK-x0b" firstAttribute="centerX" secondItem="TPh-kd-No2" secondAttribute="centerX" constant="-1" id="J9F-Va-0XB"/>
                             <constraint firstItem="p4E-aG-Poz" firstAttribute="top" secondItem="LwO-qo-Dhy" secondAttribute="bottom" constant="8" id="LCu-2s-VMI"/>
+                            <constraint firstItem="NfS-2G-g6E" firstAttribute="top" secondItem="GGS-ek-WNT" secondAttribute="bottom" constant="8" symbolic="YES" id="QrJ-Ji-7kY"/>
                             <constraint firstItem="GGS-ek-WNT" firstAttribute="centerX" secondItem="hvK-H9-PWP" secondAttribute="centerX" id="URl-zr-Dyv"/>
                             <constraint firstItem="hWo-HK-x0b" firstAttribute="leading" secondItem="hvK-H9-PWP" secondAttribute="leadingMargin" id="kwB-wr-WER"/>
                             <constraint firstItem="GGS-ek-WNT" firstAttribute="leading" secondItem="p4E-aG-Poz" secondAttribute="leading" id="tKg-ov-qhT"/>
+                            <constraint firstItem="NfS-2G-g6E" firstAttribute="centerX" secondItem="hvK-H9-PWP" secondAttribute="centerX" id="uCU-5c-2oq"/>
                             <constraint firstItem="LwO-qo-Dhy" firstAttribute="centerX" secondItem="hvK-H9-PWP" secondAttribute="centerX" id="xQK-tX-oeg"/>
                         </constraints>
                     </view>

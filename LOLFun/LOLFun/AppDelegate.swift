@@ -8,6 +8,11 @@
 
 import UIKit
 
+// Parse Champion data from json file.
+let path = NSBundle.mainBundle().pathForResource("champions", ofType: "json")
+let jsonData : NSData = NSData.dataWithContentsOfMappedFile(path as String!) as! NSData
+let champData = JSON(data: jsonData)["data"];
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -43,4 +48,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
 
