@@ -22,6 +22,7 @@ class SummonerInfoViewController: UIViewController {
     private var region : String?
     private var summonerName : String?
     private let kRankedSoloQueue : String = "RANKED_SOLO_5x5";
+    private var inGameInfo : JSON?;
     
     let helper = APIManager();
 
@@ -30,9 +31,12 @@ class SummonerInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         print(summonerInfo);
         
+        // Set title to the summoner name
+        self.title = self.summonerName!; 
+        
         // Get the ranked information for the summoner. 
         dispatch_async(dispatch_get_main_queue()) {
-            self.helper.getRankedInformationForSummonerById(self.summonerId!, region: self.region!.lowercaseString)
+            self.helper.getRankedInformationForSummonerById([self.summonerId!], region: self.region!.lowercaseString)
                 {
                     (json) -> Void in
                     self.summonerInfo = json;
@@ -54,27 +58,25 @@ class SummonerInfoViewController: UIViewController {
             self.helper.getInGameInformationForSummonerById(self.summonerId!, region: self.region!)
             {
                 (json) -> Void in
-                var champions : Array<Champion> = self.helper.getChampionsById(["60", "412"]);
-                dispatch_async(dispatch_get_main_queue()){
-                    self.helper.getChampionImageByName("Thresh.png")
-                    {
-                        (image) -> Void in
-                            self.divisionImage.image = image;
-                    }
-                }
+                self.inGameInfo = json;
+                self.performSegueWithIdentifier("showInGameInfo", sender: self);
             }
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let destination : InGameInfoViewController = segue.destinationViewController as! InGameInfoViewController;
+        
+        destination.setInGameInfo(self.inGameInfo!);
     }
-    */
+
     
     // MARK : Getters and Setters
     func getSummonerInfo () -> JSON
@@ -123,13 +125,13 @@ class SummonerInfoViewController: UIViewController {
         {
             let soloQueueIndex          = self.findRankedSolo(json, id: self.summonerId!);
             let soloQueueObject         = json[self.summonerId!][soloQueueIndex];
-            var divisionName            = soloQueueObject["tier"].stringValue.lowercaseString;
-            if (divisionName != "challenger" && divisionName != "master")
+            let tier                    = soloQueueObject["tier"].stringValue.lowercaseString;
+            var division : String       = ""
+            if (tier != "challenger" && tier != "master")
             {
-                divisionName += "_" + soloQueueObject["entries"][0]["division"].stringValue.lowercaseString;
+                division = soloQueueObject["entries"][0]["division"].stringValue.lowercaseString;
             }
-            self.divisionImage.image    = self.helper.getImageForDivisionByName(divisionName);
-            self.summonerNameLabel.text = soloQueueObject["entries"][0]["playerOrTeamName"].stringValue;
+            self.divisionImage.image    = self.helper.getImageForDivisionByName(tier, division: division);
             self.divisionNameLabel.text = soloQueueObject["name"].stringValue;
             self.winLossLabel.text      = String(soloQueueObject["entries"][0]["wins"].intValue) + "W  " +  String(soloQueueObject["entries"][0]["losses"].intValue) + "L";
             self.tierLabel.text         = soloQueueObject["tier"].stringValue.lowercaseString.capitalizedString + " " + soloQueueObject["entries"][0]["division"].stringValue + "  " + String(soloQueueObject["entries"][0]["leaguePoints"].intValue) + "LP";

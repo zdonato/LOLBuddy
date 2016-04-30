@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		622EAF371BD53CCE004FBBB8 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EAF361BD53CCE004FBBB8 /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
+		620F76D01BFEB10B007411DD /* InGameInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620F76CF1BFEB10B007411DD /* InGameInfoTableViewCell.swift */; };
+		621FC3751BDBF22F00BB55C4 /* InGameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FC3741BDBF22F00BB55C4 /* InGameInfoViewController.swift */; };
+		622EAF371BD53CCE004FBBB8 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EAF361BD53CCE004FBBB8 /* SwiftyJSON.swift */; };
 		6231ACD91B57560600F35518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231ACD81B57560600F35518 /* AppDelegate.swift */; };
 		6231ACDE1B57560600F35518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6231ACDC1B57560600F35518 /* Main.storyboard */; };
 		6231ACE01B57560600F35518 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6231ACDF1B57560600F35518 /* Images.xcassets */; };
@@ -16,8 +18,8 @@
 		6231ACF91B57582200F35518 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231ACF81B57582200F35518 /* HomeViewController.swift */; };
 		6231ACFB1B575A8900F35518 /* SummonerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231ACFA1B575A8900F35518 /* SummonerInfoViewController.swift */; };
 		6231ACFF1B575F0400F35518 /* LOLAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231ACFE1B575F0400F35518 /* LOLAPIHelper.swift */; };
-		6271FDFD1BD8697800113392 /* champions.json in Resources */ = {isa = PBXBuildFile; fileRef = 6271FDFC1BD8697800113392 /* champions.json */; settings = {ASSET_TAGS = (); }; };
-		6271FDFF1BD86B8B00113392 /* Champion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6271FDFE1BD86B8B00113392 /* Champion.swift */; settings = {ASSET_TAGS = (); }; };
+		6271FDFD1BD8697800113392 /* champions.json in Resources */ = {isa = PBXBuildFile; fileRef = 6271FDFC1BD8697800113392 /* champions.json */; };
+		6271FDFF1BD86B8B00113392 /* Champion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6271FDFE1BD86B8B00113392 /* Champion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		620F76CF1BFEB10B007411DD /* InGameInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGameInfoTableViewCell.swift; sourceTree = "<group>"; };
+		621FC3741BDBF22F00BB55C4 /* InGameInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGameInfoViewController.swift; sourceTree = "<group>"; };
 		622EAF361BD53CCE004FBBB8 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../SwiftyJSON.swift; sourceTree = "<group>"; };
 		6231ACD31B57560600F35518 /* LOLFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LOLFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6231ACD71B57560600F35518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		620F76CE1BFEB0D6007411DD /* InGameInfo */ = {
+			isa = PBXGroup;
+			children = (
+				620F76CF1BFEB10B007411DD /* InGameInfoTableViewCell.swift */,
+			);
+			name = InGameInfo;
+			sourceTree = "<group>";
+		};
 		6231ACCA1B57560600F35518 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +100,7 @@
 		6231ACD51B57560600F35518 /* LOLFun */ = {
 			isa = PBXGroup;
 			children = (
+				620F76CE1BFEB0D6007411DD /* InGameInfo */,
 				6231ACFD1B575EEF00F35518 /* APIHelpers */,
 				6231AD001B575F0D00F35518 /* ViewControllers */,
 				6231ACD81B57560600F35518 /* AppDelegate.swift */,
@@ -137,6 +150,7 @@
 		6231AD001B575F0D00F35518 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				621FC3741BDBF22F00BB55C4 /* InGameInfoViewController.swift */,
 				6231ACF81B57582200F35518 /* HomeViewController.swift */,
 				6231ACFA1B575A8900F35518 /* SummonerInfoViewController.swift */,
 			);
@@ -188,7 +202,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Zachary Donato";
 				TargetAttributes = {
 					6231ACD21B57560600F35518 = {
@@ -246,12 +260,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620F76D01BFEB10B007411DD /* InGameInfoTableViewCell.swift in Sources */,
 				6231ACFB1B575A8900F35518 /* SummonerInfoViewController.swift in Sources */,
 				6231ACD91B57560600F35518 /* AppDelegate.swift in Sources */,
 				6271FDFF1BD86B8B00113392 /* Champion.swift in Sources */,
 				6231ACFF1B575F0400F35518 /* LOLAPIHelper.swift in Sources */,
 				622EAF371BD53CCE004FBBB8 /* SwiftyJSON.swift in Sources */,
 				6231ACF91B57582200F35518 /* HomeViewController.swift in Sources */,
+				621FC3751BDBF22F00BB55C4 /* InGameInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +330,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -382,6 +399,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LOLFun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zdonato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -395,6 +413,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LOLFun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zdonato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -414,6 +433,7 @@
 				);
 				INFOPLIST_FILE = LOLFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zdonato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LOLFun.app/LOLFun";
 			};
@@ -429,6 +449,7 @@
 				);
 				INFOPLIST_FILE = LOLFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zdonato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LOLFun.app/LOLFun";
 			};

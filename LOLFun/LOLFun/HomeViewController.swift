@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private var region : String?;
     private var summonerInfo : JSON?;
     private var summonerId: String?;
+    private var summonerNameString : String?
     
     let helper = APIManager();
     
@@ -95,6 +96,7 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 cleanName = cleanName.lowercaseString;
                 
                 self.summonerId = json[cleanName]["id"].stringValue;
+                self.summonerNameString = json[cleanName]["name"].stringValue;
                 
                 self.performSegueWithIdentifier("showSummonerInfo", sender: self);
             }
@@ -110,7 +112,7 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         destination.setSummonerInfo(self.summonerInfo!);
         destination.setSummonerId(self.summonerId!);
         destination.setRegion(self.region!);
-        destination.setSummonerName(self.summonerName!.text!); 
+        destination.setSummonerName(self.summonerNameString!);
     }
     
     

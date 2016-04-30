@@ -90,14 +90,40 @@ class APIManager : NSObject {
         return platformID;
     }
     
+    // Function to prepare summonerIDs for the URL. 
+    //
+    // @param summonerIDs Array<String> : Array of summoner IDs
+    // 
+    // @return Returns a string to be used in a URL
+    func getSummonerIDsString(summonerIDs : Array<String>) -> String
+    {
+        var summonerIDString = "";
+        
+        for var i = 0; i < summonerIDs.count; i++ {
+            summonerIDString += cleanSummonerName(summonerIDs[i]);
+            if (i != summonerIDs.count-1)
+            {
+                summonerIDString += ",";
+            }
+        }
+        
+        return summonerIDString;
+    }
+    
     // Function to get the division image for a summoner.
     //
     // @param divisionName : The name of the division as returned from the server.
     //
     // @return Returns the image for the divison
-    func getImageForDivisionByName(divisionName : String) -> UIImage
+    func getImageForDivisionByName(tier: String, division : String = "") -> UIImage
     {
-        return UIImage(named: divisionName)!;
+        var imageName = tier.lowercaseString;
+        if (division != "")
+        {
+            imageName += "_" + division.lowercaseString;
+        }
+        
+        return UIImage(named: imageName)!;
     }
     
     // MARK: Static API Helper Functions
@@ -114,10 +140,10 @@ class APIManager : NSObject {
         var champObject : Champion?;
         for id in championID
         {
-            for (someString, obj) in champData
+            for (_, championObj) in champData
             {
-                if (id == obj["id"].stringValue){
-                    champObject = Champion(name: obj["name"].stringValue, id: obj["id"].stringValue, title: obj["title"].stringValue, imageName: obj["image"]["full"].stringValue);
+                if (id == championObj["id"].stringValue){
+                    champObject = Champion(name: championObj["name"].stringValue, id: championObj["id"].stringValue, title: championObj["title"].stringValue, imageName: championObj["image"]["full"].stringValue);
                     championObjectArray.append(champObject!);
                 }
             }
@@ -198,21 +224,23 @@ class APIManager : NSObject {
     
     // Function to get the ranked information for a summoner by Id.
     //
-    // @param summonerId : The id of the Summoner
+    // @param summonerIds : Array<String> Array of summoner ids
     // @param region : The region of the summoner
     // @param completion : Completion block to run once the data is returned
     // 
     // @Return Returns the ranked information for the summoner in JSON format in the completion block.
-    func getRankedInformationForSummonerById(summonerID : String, region : String, completion : (json: JSON) -> Void)
+    func getRankedInformationForSummonerById(summonerIDs : Array<String>, region : String, completion : (json: JSON) -> Void)
     {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration();
         let session = NSURLSession(configuration: config);
         let request = NSMutableURLRequest();
         
-        request.URL = NSURL(string: "https://\(region).\(self.kBaseURL)\(region)/\(self.kSummonerLeagueInfoURL)\(summonerID)/\(self.kEntry)\(self.kAPIKey)");
+        let summonerIDsURLParam = getSummonerIDsString(summonerIDs);
+        
+        request.URL = NSURL(string: "https://\(region).\(self.kBaseURL)\(region)/\(self.kSummonerLeagueInfoURL)\(summonerIDsURLParam)/\(self.kEntry)\(self.kAPIKey)");
         request.HTTPMethod = "GET";
         
-        NSLog("Starting request for \(summonerID)");
+        NSLog("Starting request for \(summonerIDsURLParam)");
         let task = session.dataTaskWithRequest(request){
             (data, response, error) -> Void in
                 if (error != nil)
